@@ -17,6 +17,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.inventory.ItemStack;
+import uk.co.oliwali.HawkEye.DataType;
+import uk.co.oliwali.HawkEye.entry.DataEntry;
+import uk.co.oliwali.HawkEye.util.HawkEyeAPI;
 
 /**
  * Created by Jaxon on 7/19/2017.
@@ -88,6 +91,9 @@ public class MainListener implements Listener {
                     seedAmount = 0;
                     break;
             }
+            /*Logs the block break with Hawke-Eye ;)*/
+            HawkEyeAPI.addEntry(new DataEntry(player, DataType.BLOCK_BREAK, block.getLocation()));
+
             /*Checks to make sure there is enough to drop before running this.*/
             if (cropAmount >= 1) {
             /*Checks if Item has Luck enchant and adds the # of luck onto the drop amount.*/

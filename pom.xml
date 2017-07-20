@@ -51,5 +51,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>src.uk</groupId>
+            <artifactId>HawkeEye</artifactId>
+            <version>1.9</version>
+            <systemPath>${project.basedir}/libs/HawkEye.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
+
     </dependencies>
 </project>
