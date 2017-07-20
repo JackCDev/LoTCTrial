@@ -1,5 +1,6 @@
 package org.lotc.trial.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +19,12 @@ public class ToggleTrample implements CommandExecutor {
             Player player = (Player) commandSender;
             FileConfiguration configuration = TrampleConfig.getConfig();
             if(player.hasPermission("trial.toggletrample")) {
-
+                if(args.length == 1) {
+                    if(Bukkit.getPlayer(args[0]) != null) {
+                        player = Bukkit.getPlayer(args[0]);
+                        commandSender.sendMessage(ChatColor.GREEN + "Changed " + player.getName() + "'s toggle");
+                    }
+                }
             /*Makes sure there is a actual config section to read from.*/
                 if (!configuration.contains(player.getUniqueId() + ".Toggles.Trample")) {
                     configuration.set(player.getUniqueId() + ".Toggles.Trample", false);
