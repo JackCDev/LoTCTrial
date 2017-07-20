@@ -10,9 +10,9 @@ public enum EnumCropType {
     WHEAT((byte)7,new ItemStack(Material.WHEAT), new ItemStack(Material.SEEDS)),
     MELON((byte)0,new ItemStack(Material.MELON), new ItemStack(Material.MELON_SEEDS)),
     PUMPKIN((byte)0, new ItemStack(Material.PUMPKIN), new ItemStack(Material.PUMPKIN_SEEDS)),
-    POTATO((byte)7,new ItemStack(Material.POTATO_ITEM), null),
-    CARROT((byte)7,new ItemStack(Material.CARROT_ITEM), null),
-    COCOA((byte)2, new ItemStack(Material.COCOA), null),
+    POTATO((byte)7,new ItemStack(Material.POTATO_ITEM), new ItemStack(Material.POTATO_ITEM)),
+    CARROT((byte)7,new ItemStack(Material.CARROT_ITEM), new ItemStack(Material.CARROT_ITEM)),
+    COCOA((byte)2, new ItemStack(Material.COCOA), new ItemStack(Material.COCOA)),
     BEATS((byte)3,new ItemStack(Material.BEETROOT), new ItemStack(Material.BEETROOT_SEEDS)),
     NETHER_WART((byte)3,new ItemStack(Material.NETHER_WARTS), null);
 

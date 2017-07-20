@@ -115,7 +115,7 @@ public class MainListener implements Listener {
                 }
 
             /*Drops the seed if the amount is above 1*/
-                if (seedAmount >= 1 && EnumCropType.enumFromMaterial(blockType).toSeedItemStack() != null) {
+                if (seedAmount >= 1) {
                     ItemStack seedToDrop = EnumCropType.enumFromMaterial(blockType).toSeedItemStack();
                     seedToDrop.setAmount(cropAmount);
                     block.getWorld().dropItemNaturally(block.getLocation(), seedToDrop);
