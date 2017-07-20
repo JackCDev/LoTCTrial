@@ -1,0 +1,7 @@
+name: LOTCTrial
+main: org.lotc.trial.LoTCTrial
+version: 1.0
+author: Red
+
+commands:
+   toggletrample:
