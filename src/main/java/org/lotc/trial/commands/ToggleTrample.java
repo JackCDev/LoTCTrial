@@ -17,21 +17,23 @@ public class ToggleTrample implements CommandExecutor {
         if(commandSender instanceof Player) {
             Player player = (Player) commandSender;
             FileConfiguration configuration = TrampleConfig.getConfig();
+            if(player.hasPermission("trial.toggletrample")) {
             /*Makes sure there is a actual config section to read from.*/
-            if (!configuration.contains(player.getUniqueId() + ".Toggles.Trample")) {
-                configuration.set(player.getUniqueId() + ".Toggles.Trample", false);
-            }
-            Boolean trampleToggled = configuration.getBoolean(player.getUniqueId() + ".Toggles.Trample");
+                if (!configuration.contains(player.getUniqueId() + ".Toggles.Trample")) {
+                    configuration.set(player.getUniqueId() + ".Toggles.Trample", false);
+                }
+                Boolean trampleToggled = configuration.getBoolean(player.getUniqueId() + ".Toggles.Trample");
             /*If the trample toggle is already true it enables trampling crops*/
-            if(trampleToggled) {
-                player.sendMessage(ChatColor.RED + "** Trampling Enabled **");
-                configuration.set(player.getUniqueId() + ".Toggles.Trample", false);
+                if (trampleToggled) {
+                    player.sendMessage(ChatColor.RED + "** Trampling Enabled **");
+                    configuration.set(player.getUniqueId() + ".Toggles.Trample", false);
                 /*Disables the trampling of crops if it returns false*/
-            }else if(trampleToggled == false) {
-                player.sendMessage(ChatColor.GREEN + "** Trampling Disabled **");
-                configuration.set(player.getUniqueId() + ".Toggles.Trample", true);
+                } else if (trampleToggled == false) {
+                    player.sendMessage(ChatColor.GREEN + "** Trampling Disabled **");
+                    configuration.set(player.getUniqueId() + ".Toggles.Trample", true);
+                }
+                TrampleConfig.saveConfig();
             }
-            TrampleConfig.saveConfig();
         }
         return false;
     }
