@@ -106,7 +106,7 @@ public class MainListener implements Listener {
                     cropAmount = luckAmount + cropAmount;
                 }
             /*Adds a little spice to the drops! :D*/
-                if (rarityAmount <= 4) {
+                if (rarityAmount <= 2) {
                     ItemStack itemStack = new ItemStack(Material.DIAMOND);
                     block.getWorld().dropItemNaturally(block.getLocation(), itemStack);
                     player.sendMessage(ChatColor.AQUA + "While farming you dug up diamonds!");
