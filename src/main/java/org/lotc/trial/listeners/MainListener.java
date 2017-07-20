@@ -94,6 +94,9 @@ public class MainListener implements Listener {
             /*Logs the block break with Hawke-Eye ;)*/
             HawkEyeAPI.addEntry(new DataEntry(player, DataType.BLOCK_BREAK, block.getLocation()));
 
+            /*Removes the currect Durability from the Item (Unbreaking already consideres the Dura)*/
+            itemInHand.setDurability((short)(itemInHand.getDurability() + 1));
+
             /*Checks to make sure there is enough to drop before running this.*/
             if (cropAmount >= 1) {
             /*Checks if Item has Luck enchant and adds the # of luck onto the drop amount.*/
