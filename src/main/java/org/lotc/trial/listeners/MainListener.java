@@ -2,12 +2,15 @@ package org.lotc.trial.listeners;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.lotc.trial.Utils.MathUtil;
+import org.lotc.trial.Utils.MiscUtils;
+import org.lotc.trial.Utils.Particles;
 import org.lotc.trial.configs.TrampleConfig;
 import org.lotc.trial.enums.EnumCropType;
 import org.bukkit.Material;
@@ -57,6 +60,8 @@ public class MainListener implements Listener {
         final Block block = event.getBlock();
         final Material blockType = event.getBlock().getType();
         final ItemStack itemInHand = event.getPlayer().getInventory().getItemInMainHand();
+        /*The Amounts that are going to drop*/
+        int rarityAmount = MathUtil.random.nextInt(20) + 1;
         int cropAmount = 0;
         int seedAmount = MathUtil.random.nextInt(2) + 1;
         /*Makes sure the item broke is a crop.*/
@@ -87,6 +92,13 @@ public class MainListener implements Listener {
             final int luckAmount = itemInHand.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
             seedAmount = luckAmount + seedAmount;
             cropAmount = luckAmount + cropAmount;
+        }
+        /*Adds a little spice to the drops! :D*/
+        if(rarityAmount <= 4) {
+            ItemStack itemStack = new ItemStack(Material.DIAMOND);
+            block.getWorld().dropItemNaturally(block.getLocation(), itemStack);
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+            MiscUtils.doFirework(player);
         }
         /*Drops the crop if the amount is above 1*/
         if (cropAmount >= 1) {
