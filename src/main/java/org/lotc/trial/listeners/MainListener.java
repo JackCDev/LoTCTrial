@@ -84,31 +84,32 @@ public class MainListener implements Listener {
                 seedAmount = 0;
                 break;
         }
-        /*Checks if Item has Luck enchant and adds the # of luck onto the drop amount.*/
-        if(cropAmount >= 1 && itemInHand.getEnchantments().containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
-            final int luckAmount = itemInHand.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
-            seedAmount = luckAmount + seedAmount;
-            cropAmount = luckAmount + cropAmount;
-        }
-        /*Adds a little spice to the drops! :D*/
-        if(cropAmount >= 1 && rarityAmount <= 4) {
-            ItemStack itemStack = new ItemStack(Material.DIAMOND);
-            block.getWorld().dropItemNaturally(block.getLocation(), itemStack);
-            player.sendMessage(ChatColor.AQUA + "While farming you dug up diamonds!");
-            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-            MiscUtils.doFirework(player);
-        }
-        /*Drops the crop if the amount is above 1*/
-        if (cropAmount >= 1) {
+        if(cropAmount >= 1) {
+            /*Checks if Item has Luck enchant and adds the # of luck onto the drop amount.*/
+            if (itemInHand.getEnchantments().containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
+                final int luckAmount = itemInHand.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
+                seedAmount = luckAmount + seedAmount;
+                cropAmount = luckAmount + cropAmount;
+            }
+            /*Adds a little spice to the drops! :D*/
+            if (rarityAmount <= 4) {
+                ItemStack itemStack = new ItemStack(Material.DIAMOND);
+                block.getWorld().dropItemNaturally(block.getLocation(), itemStack);
+                player.sendMessage(ChatColor.AQUA + "While farming you dug up diamonds!");
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+                MiscUtils.doFirework(player);
+            }
+
+            /*Drops the seed if the amount is above 1*/
+            if (seedAmount >= 1 && EnumCropType.enumFromMaterial(blockType).toSeedItemStack() != null) {
+                ItemStack seedToDrop = EnumCropType.enumFromMaterial(blockType).toSeedItemStack();
+                seedToDrop.setAmount(cropAmount);
+                block.getWorld().dropItemNaturally(block.getLocation(), seedToDrop);
+            }
+            /*Drops the current crop amount*/
             ItemStack cropToDrop = EnumCropType.enumFromMaterial(blockType).toCropItemStack();
             cropToDrop.setAmount(cropAmount);
             block.getWorld().dropItemNaturally(block.getLocation(), cropToDrop);
-        }
-        /*Drops the seed if the amount is above 1*/
-        if (seedAmount >= 1 && EnumCropType.enumFromMaterial(blockType).toSeedItemStack() != null) {
-            ItemStack seedToDrop = EnumCropType.enumFromMaterial(blockType).toSeedItemStack();
-            seedToDrop.setAmount(cropAmount);
-            block.getWorld().dropItemNaturally(block.getLocation(), seedToDrop);
         }
     }
 }
