@@ -13,11 +13,12 @@ import org.lotc.trial.configs.TrampleConfig;
  */
 public class ToggleTrample implements CommandExecutor {
 
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(commandSender instanceof Player) {
             Player player = (Player) commandSender;
             FileConfiguration configuration = TrampleConfig.getConfig();
             if(player.hasPermission("trial.toggletrample")) {
+
             /*Makes sure there is a actual config section to read from.*/
                 if (!configuration.contains(player.getUniqueId() + ".Toggles.Trample")) {
                     configuration.set(player.getUniqueId() + ".Toggles.Trample", false);

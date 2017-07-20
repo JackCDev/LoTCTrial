@@ -7,21 +7,24 @@ import org.bukkit.inventory.ItemStack;
  * Created by Jaxon on 7/19/2017.
  */
 public enum EnumCropType {
-    WHEAT(new ItemStack(Material.WHEAT), new ItemStack(Material.SEEDS)),
-    MELON(new ItemStack(Material.MELON), new ItemStack(Material.MELON_SEEDS)),
-    PUMPKIN(new ItemStack(Material.PUMPKIN), new ItemStack(Material.PUMPKIN_SEEDS)),
-    POTATO(new ItemStack(Material.POTATO), null),
-    CARROT(new ItemStack(Material.CARROT), null),
-    COCOA(new ItemStack(Material.COCOA), null),
-    BEATS(new ItemStack(Material.BEETROOT), new ItemStack(Material.BEETROOT_SEEDS)),
-    NETHER_WART(new ItemStack(Material.NETHER_WARTS), null);
+    WHEAT((byte)7,new ItemStack(Material.WHEAT), new ItemStack(Material.SEEDS)),
+    MELON((byte)0,new ItemStack(Material.MELON), new ItemStack(Material.MELON_SEEDS)),
+    PUMPKIN((byte)0, new ItemStack(Material.PUMPKIN), new ItemStack(Material.PUMPKIN_SEEDS)),
+    POTATO((byte)7,new ItemStack(Material.POTATO_ITEM), null),
+    CARROT((byte)7,new ItemStack(Material.CARROT_ITEM), null),
+    COCOA((byte)2, new ItemStack(Material.COCOA), null),
+    BEATS((byte)3,new ItemStack(Material.BEETROOT), new ItemStack(Material.BEETROOT_SEEDS)),
+    NETHER_WART((byte)3,new ItemStack(Material.NETHER_WARTS), null);
 
     ItemStack cropType;
     ItemStack seedType;
+    byte fullyGrown;
 
-    EnumCropType(ItemStack cropType, ItemStack seedType) {
+    EnumCropType(byte fullyGrown, ItemStack cropType, ItemStack seedType) {
         this.cropType = cropType;
         this.seedType = seedType;
+        this.fullyGrown = fullyGrown;
+
     }
 
 
@@ -54,6 +57,10 @@ public enum EnumCropType {
     /*Returns the Seed to drop*/
     public ItemStack toSeedItemStack(){
         return this.seedType;
+    }
+    /*returns the data of the fully grown plant*/
+    public byte getByte(){
+        return this.fullyGrown;
     }
 
 }
