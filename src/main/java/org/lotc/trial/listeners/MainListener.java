@@ -94,7 +94,7 @@ public class MainListener implements Listener {
             cropAmount = luckAmount + cropAmount;
         }
         /*Adds a little spice to the drops! :D*/
-        if(rarityAmount <= 4) {
+        if(cropAmount >= 1 && rarityAmount <= 4) {
             ItemStack itemStack = new ItemStack(Material.DIAMOND);
             block.getWorld().dropItemNaturally(block.getLocation(), itemStack);
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
