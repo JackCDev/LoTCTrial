@@ -1,9 +1,7 @@
 package org.lotc.trial.listeners;
 
 
-import org.bukkit.Bukkit;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityInteractEvent;
@@ -13,7 +11,6 @@ import org.lotc.trial.Utils.MiscUtils;
 import org.lotc.trial.Utils.Particles;
 import org.lotc.trial.configs.TrampleConfig;
 import org.lotc.trial.enums.EnumCropType;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,7 +35,7 @@ public class MainListener implements Listener {
             /*Checks if trampled block is soil.*/
             if(block.getType() == Material.SOIL ) {
                 /*Does the final check to make sure the player has his toggles disabled, and cancels the event.*/
-                if(TrampleConfig.getConfig().getBoolean(player.getUniqueId() + ".Toggles.Trample") == false){event.setCancelled(true);}
+                if(TrampleConfig.getConfig().getBoolean(player.getUniqueId() + ".Toggles.Trample") == true){event.setCancelled(true);}
             }
         }
 
@@ -97,6 +94,7 @@ public class MainListener implements Listener {
         if(cropAmount >= 1 && rarityAmount <= 4) {
             ItemStack itemStack = new ItemStack(Material.DIAMOND);
             block.getWorld().dropItemNaturally(block.getLocation(), itemStack);
+            player.sendMessage(ChatColor.AQUA + "While farming you dug up diamonds!");
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
             MiscUtils.doFirework(player);
         }
