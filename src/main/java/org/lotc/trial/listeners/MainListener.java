@@ -5,8 +5,6 @@ import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.material.Crops;
-import org.lotc.trial.Utils.MathUtil;
 import org.lotc.trial.Utils.MiscUtils;
 import org.lotc.trial.configs.TrampleConfig;
 import org.lotc.trial.enums.EnumCropType;
@@ -20,6 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import uk.co.oliwali.HawkEye.DataType;
 import uk.co.oliwali.HawkEye.entry.DataEntry;
 import uk.co.oliwali.HawkEye.util.HawkEyeAPI;
+
+import java.util.Random;
 
 /**
  * Created by Jaxon on 7/19/2017.
@@ -56,14 +56,15 @@ public class MainListener implements Listener {
     /*Handles the dropping of the item, and checking what Item is used.*/
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        final Player player = event.getPlayer();
-        final Block block = event.getBlock();
-        final Material blockType = event.getBlock().getType();
-        final ItemStack itemInHand = event.getPlayer().getInventory().getItemInMainHand();
+        Player player = event.getPlayer();
+        Block block = event.getBlock();
+        Material blockType = event.getBlock().getType();
+        ItemStack itemInHand = event.getPlayer().getInventory().getItemInMainHand();
         /*The Amounts that are going to drop*/
-        int rarityAmount = MathUtil.random.nextInt(20) + 1;
+        Random random = new Random();
+        int rarityAmount = random.nextInt(20) + 1;
         int cropAmount = 0;
-        int seedAmount = MathUtil.random.nextInt(2) + 1;
+        int seedAmount = random.nextInt(2) + 1;
         /*Makes sure the item broke is a crop.*/
         if (EnumCropType.enumFromMaterial(blockType) == null) {
             return;
@@ -94,7 +95,7 @@ public class MainListener implements Listener {
             /*Logs the block break with Hawke-Eye ;)*/
             HawkEyeAPI.addEntry(new DataEntry(player, DataType.BLOCK_BREAK, block.getLocation()));
 
-            /*Removes the currect Durability from the Item (Unbreaking already consideres the Dura)*/
+            /*Removes the correct Durability from the Item (Unbreaking already considers the Dura)*/
             itemInHand.setDurability((short)(itemInHand.getDurability() + 1));
 
             /*Checks to make sure there is enough to drop before running this.*/
