@@ -1,5 +1,6 @@
 package org.lotc.trial;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.lotc.trial.commands.ToggleTrample;
@@ -12,9 +13,9 @@ import sun.applet.Main;
  */
 public class LoTCTrial extends JavaPlugin {
 
-    public MainListener mainListener;
+    private MainListener mainListener;
 
-    public static LoTCTrial plugin;
+    private static LoTCTrial plugin;
 
     public static LoTCTrial getInstance() {
         return plugin;

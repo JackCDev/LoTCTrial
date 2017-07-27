@@ -4,6 +4,7 @@ package org.lotc.trial.listeners;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.lotc.trial.Utils.MiscUtils;
 import org.lotc.trial.configs.TrampleConfig;
